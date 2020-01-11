@@ -20,7 +20,7 @@ export class HomePage {
               private router: Router,) {}
 
   buttonClick(){
-  alert(this.direccion_salida)
+  //alert(this.direccion_salida)
   this.router.navigate(['/list']);
   }
 }
