@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Direccion
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Ingresar direccion de partida</ion-card-title>
+    <ion-input [(ngModel)] ="direccion_salida" placeholder="Ingresar direccion">
+      <ion-icon name="pin"></ion-icon>
+    </ion-input>
+  </ion-card-header>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Ingresar direccion de llegada</ion-card-title>
+    <ion-input [(ngModel)]="direccion_llegada" placeholder="Ingresar direccion">
+    <ion-icon name="pin"></ion-icon>
+  </ion-input>
+</ion-card-header>
+</ion-card><ion-item>
+  <ion-button (click) ="buttonClick()" slot="start" shape="round" color="tertiary"  >
+    BUSCAR RUTA</ion-button>
+</ion-item>
+<ion-content padding>
+</ion-content>
+</ion-content>
