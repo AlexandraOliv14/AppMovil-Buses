@@ -13,13 +13,13 @@ $ npm install
 $ npm install -g ionic
 ```
 
-Cambiar path
+Para cambiar la ruta en donde se aloja el API de este proyecto, posicionarse en la carpeta del proyecto y ejecutar el siguiente comando :
+
+Modifique la ruta la constante api con la dirección donde se aloja el API de este proyecto
 
 ```bash
-
 $ nano src/app/services/recorrido.service.ts
 ```
-modificar constante api con la dirección donde se aloja la api de este proyecto
 
 ## Uso en ionic
 
