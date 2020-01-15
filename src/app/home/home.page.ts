@@ -43,10 +43,15 @@ export class HomePage {
               private router: Router,
               private storage: Storage,
               public http: HttpClient,
-              private recorrido: RecorridoService) {}
+              private recorrido: RecorridoService,
+            private loadingCtrl: LoadingController) {}
 
 
   async buttonClick(){
+//Muestra anuncio de carga
+    const loading = await this.loadingCtrl.create({
+      message: 'Cargando..',
+    });
 
   this.storage.set('direccion_salida', this.direccion_salida);
   if (this.direccion_llegada.length == 0)
@@ -58,36 +63,43 @@ export class HomePage {
     {
       alert('Se ocupara la direccion del gps')
       //consulta con cordenadas
-    await  this.recorrido.getRecorridoCor(this.latitud_salida,this.longitud_salida, this.direccion_llegada)
-      .subscribe(recorrido => {
-        this.recorrido_final = recorrido;
+      await loading.present();
+      this.recorrido.getRecorridoCor(this.latitud_salida,this.longitud_salida, this.direccion_llegada)
+      .subscribe(async (recorrido) => {
+      await  console.log(recorrido);
+        this.recorrido_final = await recorrido;
+        console.log(this.recorrido_final);
+        await loading.dismiss();
+
       //  console.log(this.recorrido_final);
         //console.log('hola');
       });
       //console.log(this.recorrido_final);
-      console.log('bhsfbdhjf');
     }
     else{
       //consulta con direcciones
+      await loading.present();
     this.recorrido.getRecorridoDir(this.direccion_salida, this.direccion_llegada)
-    .subscribe(recorrido => {
-      this.recorrido_final = recorrido;
+    .subscribe(async (recorrido) => {
       console.log(recorrido);
+      this.recorrido_final = await recorrido;
+  //   await loading.dismiss();
+
     });
     }
-    this.storage.set('recorrido_final', this.recorrido_final);
-    this.storage.set('direccion_llegada', this.direccion_llegada);
-    this.storage.set('direccion_salida', this.direccion_salida);
-
+  await  this.storage.set('recorrido_final', this.recorrido_final);
+  await  this.storage.set('direccion_llegada', this.direccion_llegada);
+  await  this.storage.set('direccion_salida', this.direccion_salida);
+await loading.present();
+await loading.dismiss();
     this.router.navigate(['/page-recorrido']);
-  }
-
+};
 };
 
 
   ngOnInit() {
     //encontrar locacion del dispositivo
-    this.geolocation.getCurrentPosition({timeout:30000}).then((position) => {
+    this.geolocation.getCurrentPosition({timeout:5000}).then((position) => {
       this.latitud_salida =  position.coords.latitude;
       console.log(this.latitud_salida);
 
@@ -99,5 +111,13 @@ export class HomePage {
 
 
   };
+  async presentLoading() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Cargando..',
+      duration: 8000
+    });
+    await loading.present();
+    return loading;
+  }
 }
 //npm install @ionic/angular@4.0.0-beta.7

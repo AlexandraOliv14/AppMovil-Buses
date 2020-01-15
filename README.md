@@ -6,7 +6,7 @@ Consume el backend del siguiente repositorio [Link](https://github.com/dangalled
 
 ## Instalación
 
-Instalar ionic
+Instalar entorno
 
 ```bash
 $ npm install -g ionic
