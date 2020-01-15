@@ -20,6 +20,10 @@ const routes: Routes = [
   {
     path: 'page-recorrido',
     loadChildren: () => import('./page-recorrido/page-recorrido.module').then( m => m.PageRecorridoPageModule)
+  },
+  {
+    path: 'page-recorrido-combinacion',
+    loadChildren: () => import('./page-recorrido-combinacion/page-recorrido-combinacion.module').then( m => m.PageRecorridoCombinacionPageModule)
   }
 ];
 

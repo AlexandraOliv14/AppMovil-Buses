@@ -94,10 +94,20 @@ this.direccion_llegada = this.direccion_llegada.trim();
     }
   await  this.storage.set('recorrido_final', this.recorrido_final);
 
+  if ((this.recorrido_final.bus)=='cero')
+  {
+    alert('No se a encontrado una ruta');
+    await loading.present();
+    await loading.dismiss();
+    this.router.navigate(['/page-recorrido-combinacion'])
 
-await loading.present();
-await loading.dismiss();
+  }
+  else{
+    await loading.present();
+    await loading.dismiss();
     this.router.navigate(['/page-recorrido']);
+  }
+
 };
 };
 

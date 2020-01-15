@@ -40,13 +40,6 @@ export class PageRecorridoPage implements OnInit {
   async ngOnInit() {
     this.recorrido_final = await this.storage.get('recorrido_final');
 
-    if ((this.recorrido_final.bus)=='cero')
-    {
-      alert('No se a encontrado una ruta optima');
-
-    }
-    else
-    {
     //    console.log(this.recorrido_final);
       this.bus =  this.recorrido_final.bus;
     //    console.log(this.bus);
@@ -59,6 +52,6 @@ export class PageRecorridoPage implements OnInit {
   //  this.dato = this.storage.get('dato');
   //  this.datanormal = this.storage.get('datanormal')
 
-  }
+
 
 }
