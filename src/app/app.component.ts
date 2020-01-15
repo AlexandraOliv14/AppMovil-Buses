@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import {RecorridoService} from 'src/app/services/recorrido.service';
 
 @Component({
   selector: 'app-root',
@@ -12,21 +13,17 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 export class AppComponent {
   public appPages = [
     {
-      title: 'Home',
+      title: 'Direcciones',
       url: '/home',
-      icon: 'home'
+      icon: 'pin'
     },
-    {
-      title: 'List',
-      url: '/list',
-      icon: 'list'
-    }
   ];
 
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private recorridoService: RecorridoService,
   ) {
     this.initializeApp();
   }
@@ -36,5 +33,6 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+    
   }
 }

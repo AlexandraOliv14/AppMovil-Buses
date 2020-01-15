@@ -1,5 +1,7 @@
 {
-  "name": "IntentoSinLocacion",
-  "integrations": {},
+  "name": "IntentoAppNuevo",
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
