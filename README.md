@@ -9,9 +9,17 @@ Consume el backend del siguiente repositorio [Link](https://github.com/dangalled
 Instalar entorno
 
 ```bash
-$ npm install 
+$ npm install
 $ npm install -g ionic
 ```
+
+Cambiar path
+
+```bash
+
+$ nano src/app/services/recorrido.service.ts
+```
+modificar constante api con la dirección donde se aloja la api de este proyecto
 
 ## Uso en ionic
 
