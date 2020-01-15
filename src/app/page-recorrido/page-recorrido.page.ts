@@ -25,6 +25,7 @@ export class PageRecorridoPage implements OnInit {
 //  public dato: string;
 
   public recorrido_final: Recorrido;
+  //public recorrido_uno: Recorrido;
   public bus:string = 'no se encontro bus';
   public paradero_subida: string = 'no se encontro paradero';
   public paradero_bajada: string = 'no se encontro paradero';
@@ -39,13 +40,12 @@ export class PageRecorridoPage implements OnInit {
 
   async ngOnInit() {
     this.recorrido_final = await this.storage.get('recorrido_final');
-
     //    console.log(this.recorrido_final);
       this.bus =  this.recorrido_final.bus;
     //    console.log(this.bus);
       this.paradero_subida =  this.recorrido_final.dir[0];
     //   console.log(this.paradero_subida)
-      this.paradero_bajada =  this.recorrido_final.dir[1];
+      this.paradero_bajada =   this.recorrido_final.dir[1];
     //   console.log(this.paradero_bajada)
     //  console.log(this.recorrido_final)
     }

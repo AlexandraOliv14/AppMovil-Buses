@@ -70,47 +70,31 @@ this.direccion_llegada = this.direccion_llegada.trim();
       await loading.present();
      this.recorrido_final= await this.recorrido.getRecorridoCor(this.latitud_salida,this.longitud_salida, this.direccion_llegada);
 
-  //    .subscribe(async (recorrido) => {
-   //     console.log(recorrido);
-    //    this.recorrido_final = await recorrido;
-    //    console.log(this.recorrido_final);
-     //   await loading.dismiss();
-
-      //  console.log(this.recorrido_final);
-        //console.log('hola');
-    //  });
-      //console.log(this.recorrido_final);
     }
     else{
       //consulta con direcciones
       await loading.present();
    this.recorrido_final= await this.recorrido.getRecorridoDir(this.direccion_salida, this.direccion_llegada)
-  //  .subscribe(async (recorrido) => {
-    //7  console.log(recorrido);
-     // this.recorrido_final = await recorrido;
-  //   await loading.dismiss();
 
- //   });
     }
   await  this.storage.set('recorrido_final', this.recorrido_final);
-
-  if ((this.recorrido_final.bus)=='cero')
-  {
-    alert('No se a encontrado una ruta');
+  if(this.recorrido_final.bus == 'cero'){
+    //consulta con arreglo
     await loading.present();
     await loading.dismiss();
-    this.router.navigate(['/page-recorrido-combinacion'])
+    this.router.navigate(['/page-recorrido-combinacion']);
 
   }
-  else{
+  else
+  {
     await loading.present();
     await loading.dismiss();
     this.router.navigate(['/page-recorrido']);
+
   }
 
 };
 };
-
 
   ngOnInit() {
     //encontrar locacion del dispositivo
