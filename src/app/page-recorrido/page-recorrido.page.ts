@@ -25,29 +25,40 @@ export class PageRecorridoPage implements OnInit {
 //  public dato: string;
 
   public recorrido_final: Recorrido;
-  public bus:string;
-  public paradero_subida: string;
-  public paradero_bajada: string;
+  public bus:string = 'no se encontro bus';
+  public paradero_subida: string = 'no se encontro paradero';
+  public paradero_bajada: string = 'no se encontro paradero';
 
   constructor(
               private geolocation: Geolocation,
               private router: Router,
               private storage: Storage) {}
 
+        //      alert('Se ocupara la direccion del gps')
 
 
   async ngOnInit() {
+    this.recorrido_final = await this.storage.get('recorrido_final');
+
+    if ((this.recorrido_final.bus)=='cero')
+    {
+      alert('No se a encontrado una ruta optima');
+
+    }
+    else
+    {
+    //    console.log(this.recorrido_final);
+      this.bus =  this.recorrido_final.bus;
+    //    console.log(this.bus);
+      this.paradero_subida =  this.recorrido_final.dir[0];
+    //   console.log(this.paradero_subida)
+      this.paradero_bajada =  this.recorrido_final.dir[1];
+    //   console.log(this.paradero_bajada)
+    //  console.log(this.recorrido_final)
+    }
   //  this.dato = this.storage.get('dato');
   //  this.datanormal = this.storage.get('datanormal')
-  this.recorrido_final = await this.storage.get('recorrido_final');
-  await  console.log(this.recorrido_final);
-  this.bus = await this.recorrido_final.bus;
-  await  console.log(this.bus);
-  this.paradero_subida = await this.recorrido_final.dir[0];
-  await console.log(this.paradero_subida)
-  this.paradero_bajada = await this.recorrido_final.dir[1];
-  await console.log(this.paradero_bajada)
-  console.log(this.recorrido_final)
+
   }
 
 }

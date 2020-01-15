@@ -48,9 +48,12 @@ export class HomePage {
 
 
   async buttonClick(){
-//Muestra anuncio de carga
+//quita espacios
+this.direccion_salida = this.direccion_salida.trim();
+this.direccion_llegada = this.direccion_llegada.trim();
+//muestra aunucio de carga
     const loading = await this.loadingCtrl.create({
-      message: 'Cargando..',
+      message: 'Buscando recorridos..',
     });
 
   this.storage.set('direccion_salida', this.direccion_salida);
@@ -62,34 +65,36 @@ export class HomePage {
     if (this.direccion_salida.length == 0)
     {
       alert('Se ocupara la direccion del gps')
+
       //consulta con cordenadas
       await loading.present();
-      this.recorrido.getRecorridoCor(this.latitud_salida,this.longitud_salida, this.direccion_llegada)
-      .subscribe(async (recorrido) => {
-      await  console.log(recorrido);
-        this.recorrido_final = await recorrido;
-        console.log(this.recorrido_final);
-        await loading.dismiss();
+     this.recorrido_final= await this.recorrido.getRecorridoCor(this.latitud_salida,this.longitud_salida, this.direccion_llegada);
+
+  //    .subscribe(async (recorrido) => {
+   //     console.log(recorrido);
+    //    this.recorrido_final = await recorrido;
+    //    console.log(this.recorrido_final);
+     //   await loading.dismiss();
 
       //  console.log(this.recorrido_final);
         //console.log('hola');
-      });
+    //  });
       //console.log(this.recorrido_final);
     }
     else{
       //consulta con direcciones
       await loading.present();
-    this.recorrido.getRecorridoDir(this.direccion_salida, this.direccion_llegada)
-    .subscribe(async (recorrido) => {
-      console.log(recorrido);
-      this.recorrido_final = await recorrido;
+   this.recorrido_final= await this.recorrido.getRecorridoDir(this.direccion_salida, this.direccion_llegada)
+  //  .subscribe(async (recorrido) => {
+    //7  console.log(recorrido);
+     // this.recorrido_final = await recorrido;
   //   await loading.dismiss();
 
-    });
+ //   });
     }
   await  this.storage.set('recorrido_final', this.recorrido_final);
-  await  this.storage.set('direccion_llegada', this.direccion_llegada);
-  await  this.storage.set('direccion_salida', this.direccion_salida);
+
+
 await loading.present();
 await loading.dismiss();
     this.router.navigate(['/page-recorrido']);
@@ -99,12 +104,11 @@ await loading.dismiss();
 
   ngOnInit() {
     //encontrar locacion del dispositivo
-    this.geolocation.getCurrentPosition({timeout:5000}).then((position) => {
+    this.geolocation.getCurrentPosition({timeout:7000}).then((position) => {
       this.latitud_salida =  position.coords.latitude;
-      console.log(this.latitud_salida);
-
+    //  console.log(this.latitud_salida);
       this.longitud_salida = position.coords.longitude;
-      console.log(this.longitud_salida);
+    //  console.log(this.longitud_salida);
   }).catch((error) => {
     console.log('Error encontrando la gps', error);
  });
@@ -113,8 +117,8 @@ await loading.dismiss();
   };
   async presentLoading() {
     const loading = await this.loadingCtrl.create({
-      message: 'Cargando..',
-      duration: 8000
+      message: 'Buscando recorridos..',
+      duration: 5000
     });
     await loading.present();
     return loading;

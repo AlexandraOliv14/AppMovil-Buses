@@ -9,6 +9,7 @@ Consume el backend del siguiente repositorio [Link](https://github.com/dangalled
 Instalar entorno
 
 ```bash
+$ npm install 
 $ npm install -g ionic
 ```
 
